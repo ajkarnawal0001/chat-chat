@@ -3,7 +3,7 @@ const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
 const { addUser, removeUser, getUser,
-		getUsersInRoom } = require("./users");
+		getUsersInRoom } = require("./Users");
 
 const app = express();
 const server = http.createServer(app);
@@ -31,7 +31,6 @@ io.on("connection", (socket) => {
 			text: `${user.name}, has joined` });
 
 		socket.join(user.room);
-
 		io.to(user.room).emit('roomData', {
 			room: user.room,
 			users: getUsersInRoom(user.room)
